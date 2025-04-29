@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>素材库 - 专业的素材管理工具</title>
+  <style>
+    :root {
+      /* Apple Design 配色方案 */
+      --primary: #007AFF;
+      --primary-light: #409CFF;
+      --primary-dark: #0040DD;
+      --accent: #FF3B30;
+      
+      /* 功能色 */
+      --success: #34C759;
+      --warning: #FF9500;
+      --error: #FF3B30;
+      --info: #5856D6;
+      
+      /* 中性色 */
+      --bg-light: #FFFFFF;
+      --bg-gray: #F5F5F7;
+      --bg-card: rgba(255, 255, 255, 0.8);
+      
+      /* 文本颜色 */
+      --text-primary: #1D1D1F;
+      --text-secondary: #86868B;
+      --text-tertiary: #98989D;
+      --text-white: #FFFFFF;
+      
+      /* 边框与阴影 */
+      --border-light: rgba(0, 0, 0, 0.1);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+      --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.12);
+      
+      /* 间距 */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      
+      /* 圆角 - Apple 风格偏好较大的圆角 */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+    }
+    
+    @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        backdrop-filter: blur(20px) saturate(180%);
+      }
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    body {
+      background-color: var(--bg-gray);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+    
+    /* Apple 风格按钮 */
+    .button-primary {
+      background: var(--primary);
+      color: var(--text-white);
+      border: none;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-full);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .button-primary:hover {
+      transform: scale(1.02);
+      background: var(--primary-light);
+    }
+    
+    .button-primary:active {
+      transform: scale(0.98);
+    }
+    
+    .button-outline {
+      background: rgba(0, 122, 255, 0.1);
+      color: var(--primary);
+      border: none;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-full);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .button-outline:hover {
+      background: rgba(0, 122, 255, 0.15);
+    }
+    
+    /* 卡片样式 */
+    .material-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--border-light);
+    }
+    
+    .material-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: var(--shadow-float);
+    }
+    
+    /* 导航栏样式 */
+    .nav-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 84px;
+      background: rgba(255, 255, 255, 0.85);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid var(--border-light);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      font-size: 10px;
+      padding: var(--space-xs);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-item.active {
+      color: var(--primary);
+    }
+    
+    .nav-item:hover {
+      transform: scale(1.05);
+    }
+    
+    .nav-item:active {
+      transform: scale(0.95);
+    }
+    
+    .nav-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .nav-item:hover .nav-icon {
+      transform: translateY(-2px);
+    }
+    
+    /* 添加设备状态栏 */
+    .status-bar {
+      height: 44px;
+      background: rgba(255, 255, 255, 0.85);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-md);
+      font-size: 12px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .status-bar-time {
+      font-weight: 600;
+    }
+    
+    .status-bar-icons {
+      display: flex;
+      gap: var(--space-xs);
+    }
+    
+    /* 搜索框样式 */
+    .search-bar {
+      background: rgba(142, 142, 147, 0.12);
+      border: none;
+      border-radius: var(--radius-full);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: var(--space-sm) var(--space-lg);
+    }
+    
+    .search-bar:focus-within {
+      background: rgba(142, 142, 147, 0.18);
+    }
+    
+    .search-input {
+      color: var(--text-primary);
+      font-size: 15px;
+    }
+    
+    .search-input::placeholder {
+      color: var(--text-tertiary);
+    }
+    
+    /* 分类标签样式 */
+    .category-item {
+      background: rgba(142, 142, 147, 0.12);
+      color: var(--text-secondary);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: var(--radius-full);
+      padding: var(--space-sm) var(--space-lg);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .category-item:hover {
+      background: rgba(142, 142, 147, 0.18);
+      color: var(--text-primary);
+    }
+    
+    .category-item.active {
+      background: var(--primary);
+      color: var(--text-white);
+    }
+    
+    /* 图标按钮样式 */
+    .icon-button {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: transparent;
+      color: var(--text-secondary);
+      border: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .icon-button:hover {
+      background: rgba(142, 142, 147, 0.12);
+      color: var(--text-primary);
+    }
+    
+    /* 头像样式 */
+    .profile-avatar {
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    
+    .profile-avatar img {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .profile-avatar:hover img {
+      transform: scale(1.1);
+    }
+    
+    /* 统计卡片样式 */
+    .stat-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--border-light);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-float);
+    }
+    
+    .stat-value {
+      font-size: 28px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* 菜单项样式 */
+    .menu-item {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: var(--space-md) var(--space-lg);
+    }
+    
+    .menu-item:hover {
+      background: var(--bg-gray);
+    }
+    
+    .menu-icon {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .menu-item:hover .menu-icon {
+      transform: scale(1.1);
+    }
+    
+    /* 进度条样式 */
+    .progress-bar {
+      background: rgba(142, 142, 147, 0.12);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      height: 6px;
+    }
+    
+    .progress-fill {
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* 开关按钮样式 */
+    .switch {
+      position: relative;
+      width: 51px;
+      height: 31px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .switch label {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(142, 142, 147, 0.3);
+      transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 31px;
+    }
+    
+    .switch label:before {
+      position: absolute;
+      content: "";
+      height: 27px;
+      width: 27px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .switch input:checked + label {
+      background-color: var(--success);
+    }
+    
+    .switch input:checked + label:before {
+      transform: translateX(20px);
+    }
+    
+    /* 添加 Apple 风格动画效果 */
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .content {
+      height: calc(100% - 140px);
+      overflow-y: auto;
+      padding: var(--space-md);
+      background: var(--bg-light);
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .content::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .content::-webkit-scrollbar-thumb {
+      background: var(--text-tertiary);
+      border-radius: var(--radius-full);
+    }
+    
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+    }
+    
+    .material-image {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+    
+    .material-info {
+      padding: var(--space-xs);
+    }
+    
+    .material-title {
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-bottom: var(--space-xs);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .material-meta {
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+    
+    .search-container {
+      padding: var(--space-md);
+      background: var(--bg-light);
+    }
+    
+    .search-tags {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .search-tag {
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--bg-gray);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    
+    .filter-button {
+      background: none;
+      border: none;
+      color: var(--text-tertiary);
+      padding: var(--space-xs);
+      margin-left: var(--space-xs);
+    }
+    
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+    }
+    
+    .content-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    
+    .content-actions {
+      display: flex;
+      gap: var(--space-sm);
+    }
+    
+    .text-button {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .material-checkbox {
+      position: absolute;
+      top: var(--space-xs);
+      left: var(--space-xs);
+      z-index: 1;
+    }
+    
+    .material-favorite {
+      position: absolute;
+      top: var(--space-xs);
+      right: var(--space-xs);
+      z-index: 1;
+      color: var(--text-tertiary);
+      background: rgba(0, 0, 0, 0.3);
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .material-favorite.active {
+      color: var(--warning);
+    }
+    
+    .material-preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+    }
+    
+    .material-preview.video {
+      background: #000;
+    }
+    
+    .material-preview i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      color: var(--text-white);
+    }
+    
+    .material-preview .duration {
+      position: absolute;
+      bottom: var(--space-xs);
+      right: var(--space-xs);
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--text-white);
+      padding: 2px var(--space-xs);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+    }
+    
+    .material-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-xs);
+      padding: var(--space-xs);
+    }
+    
+    .category-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    
+    .category-item i {
+      font-size: 16px;
+    }
+    
+    .category-tabs {
+      display: flex;
+      padding: var(--space-md);
+      gap: var(--space-md);
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .category-tab {
+      flex: 1;
+      padding: var(--space-sm) 0;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      position: relative;
+    }
+    
+    .category-tab.active {
+      color: var(--primary);
+    }
+    
+    .category-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--primary);
+    }
+    
+    .category-section {
+      margin-bottom: var(--space-lg);
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+    }
+    
+    .section-header h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+    }
+    
+    .category-block {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+    
+    .category-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-light);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-sm);
+      color: var(--primary);
+    }
+    
+    .category-name {
+      font-size: 14px;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .category-count {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    
+    .folder-list {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    
+    .folder-item {
+      display: flex;
+      align-items: center;
+      padding: var(--space-md);
+      gap: var(--space-sm);
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .folder-item:last-child {
+      border-bottom: none;
+    }
+    
+    .sub-folder {
+      background: var(--bg-gray);
+      padding-left: calc(var(--space-md) * 2);
+    }
+    
+    .folder-drag {
+      color: var(--text-tertiary);
+      cursor: move;
+    }
+    
+    .folder-icon {
+      color: var(--primary);
+    }
+    
+    .folder-info {
+      flex: 1;
+    }
+    
+    .folder-name {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    
+    .folder-meta {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    
+    .smart-folder-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    
+    .smart-folder {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      background: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+    
+    .smart-folder-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-gray);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+    }
+    
+    .smart-folder-info {
+      flex: 1;
+    }
+    
+    .smart-folder-name {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    
+    .smart-folder-rule {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    
+    .switch {
+      position: relative;
+      width: 40px;
+      height: 24px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .switch label {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-gray);
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .switch label:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s ease;
+      border-radius: 50%;
+    }
+    
+    .switch input:checked + label {
+      background-color: var(--primary);
+    }
+    
+    .switch input:checked + label:before {
+      transform: translateX(16px);
+    }
+    
+    .storage-overview {
+      margin-bottom: var(--space-lg);
+    }
+    
+    .storage-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      border: 1px solid var(--border-light);
+    }
+    
+    .storage-info {
+      margin-bottom: var(--space-md);
+    }
+    
+    .storage-title {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .storage-used {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background: var(--bg-gray);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-md);
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: var(--radius-full);
+    }
+    
+    .storage-types {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+    
+    .storage-type {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    
+    .type-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+    
+    .type-name {
+      font-size: 12px;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+    
+    .type-size {
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+    
+    .sync-status {
+      margin-bottom: var(--space-lg);
+    }
+    
+    .sync-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      border: 1px solid var(--border-light);
+    }
+    
+    .sync-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .sync-info i {
+      font-size: 24px;
+      color: var(--success);
+    }
+    
+    .sync-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    .sync-time {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    
+    .sync-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .optimization-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    
+    .optimization-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      background: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+    }
+    
+    .optimization-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    
+    .optimization-icon.warning {
+      background: rgba(255, 193, 7, 0.1);
+      color: var(--warning);
+    }
+    
+    .optimization-icon.info {
+      background: rgba(33, 150, 243, 0.1);
+      color: var(--info);
+    }
+    
+    .optimization-icon.success {
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--success);
+    }
+    
+    .optimization-info {
+      flex: 1;
+    }
+    
+    .optimization-title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: 2px;
+    }
+    
+    .optimization-desc {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    
+    .badge {
+      padding: 2px var(--space-xs);
+      background: var(--bg-gray);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .profile-avatar {
+      position: relative;
+    }
+    
+    .profile-avatar img {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-full);
+      object-fit: cover;
+    }
+    
+    .profile-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 20px;
+      height: 20px;
+      background: var(--warning);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      font-size: 10px;
+      border: 2px solid var(--bg-card);
+    }
+    
+    .profile-info {
+      flex: 1;
+    }
+    
+    .profile-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .profile-title {
+      font-size: 14px;
+      color: var(--warning);
+    }
+    
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .menu-group {
+      margin-bottom: var(--space-lg);
+    }
+    
+    .menu-title {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-sm);
+      padding: 0 var(--space-sm);
+    }
+    
+    .menu-list {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      text-decoration: none;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+    
+    .menu-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    
+    .menu-icon.blue {
+      background: rgba(33, 150, 243, 0.1);
+      color: var(--primary);
+    }
+    
+    .menu-icon.purple {
+      background: rgba(156, 39, 176, 0.1);
+      color: #9C27B0;
+    }
+    
+    .menu-icon.green {
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--success);
+    }
+    
+    .menu-icon.orange {
+      background: rgba(255, 152, 0, 0.1);
+      color: #FF9800;
+    }
+    
+    .menu-icon.red {
+      background: rgba(244, 67, 54, 0.1);
+      color: var(--error);
+    }
+    
+    .menu-icon.gray {
+      background: rgba(158, 158, 158, 0.1);
+      color: #9E9E9E;
+    }
+    
+    .menu-content {
+      flex: 1;
+    }
+    
+    .menu-label {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    
+    .menu-desc {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    
+    .menu-version {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    
+    .button-danger {
+      width: 100%;
+      padding: var(--space-md);
+      background: var(--error);
+      color: var(--text-white);
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      margin-top: var(--space-xl);
+    }
+    
+    /* 恢复并优化预览容器样式 */
+    .app-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xl);
+      justify-content: center;
+      padding: var(--space-xl);
+      min-height: 100vh;
+      background: var(--bg-gray);
+    }
+    
+    /* 优化手机屏幕预览样式 */
+    .screen {
+      width: 375px;
+      height: 812px;
+      background: var(--bg-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(0.95);
+      border: 1px solid var(--border-light);
+    }
+    
+    .screen:hover {
+      transform: scale(1);
+      box-shadow: var(--shadow-float);
+    }
+    
+    /* 优化 header 样式 */
+    .header {
+      padding: var(--space-lg) var(--space-md);
+      background: rgba(255, 255, 255, 0.85);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+      z-index: 10;
+    }
+    
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+    
+    .header-action {
+      position: absolute;
+      right: var(--space-md);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: var(--space-sm);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- 首页/素材库 -->
+    <div class="screen">
+      <div class="header">
+        <div class="header-title">素材库</div>
+        <div class="header-action">
+          <button class="icon-button">
+            <i class="fas fa-th-large"></i>
+          </button>
+          <button class="icon-button">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="search-container">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" class="search-input" placeholder="搜索素材">
+          <button class="filter-button">
+            <i class="fas fa-filter"></i>
+          </button>
+        </div>
+        <div class="search-tags">
+          <span class="search-tag">最近7天</span>
+          <span class="search-tag">已收藏</span>
+          <span class="search-tag">已分享</span>
+        </div>
+      </div>
+      
+      <div class="category-list">
+        <div class="category-item active">全部</div>
+        <div class="category-item">
+          <i class="fas fa-image"></i>
+          <span>图片</span>
+        </div>
+        <div class="category-item">
+          <i class="fas fa-video"></i>
+          <span>视频</span>
+        </div>
+        <div class="category-item">
+          <i class="fas fa-music"></i>
+          <span>音频</span>
+        </div>
+        <div class="category-item">
+          <i class="fas fa-file-alt"></i>
+          <span>文档</span>
+        </div>
+        <div class="category-item">
+          <i class="fas fa-plus"></i>
+          <span>添加</span>
+        </div>
+      </div>
+      
+      <div class="content">
+        <div class="content-header">
+          <div class="content-title">全部素材</div>
+          <div class="content-actions">
+            <button class="text-button">
+              <i class="fas fa-sort-amount-down"></i>
+              <span>最新添加</span>
+            </button>
+            <button class="text-button">
+              <i class="fas fa-check-square"></i>
+              <span>多选</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="grid-container">
+          <div class="material-card">
+            <div class="material-checkbox">
+              <input type="checkbox" id="material1">
+              <label for="material1"></label>
+            </div>
+            <div class="material-favorite">
+              <i class="fas fa-star"></i>
+            </div>
+            <img src="https://picsum.photos/200" class="material-image" alt="素材预览">
+            <div class="material-info">
+              <div class="material-title">产品展示图</div>
+              <div class="material-meta">
+                <span>2MB</span>
+                <span>·</span>
+                <span>PNG</span>
+              </div>
+            </div>
+            <div class="material-actions">
+              <button class="icon-button">
+                <i class="fas fa-share-alt"></i>
+              </button>
+              <button class="icon-button">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="material-card">
+            <div class="material-checkbox">
+              <input type="checkbox" id="material2">
+              <label for="material2"></label>
+            </div>
+            <div class="material-favorite active">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="material-preview video">
+              <i class="fas fa-play-circle"></i>
+              <span class="duration">02:30</span>
+              <img src="https://picsum.photos/201" class="material-image" alt="视频预览">
+            </div>
+            <div class="material-info">
+              <div class="material-title">产品介绍视频</div>
+              <div class="material-meta">
+                <span>15MB</span>
+                <span>·</span>
+                <span>MP4</span>
+              </div>
+            </div>
+            <div class="material-actions">
+              <button class="icon-button">
+                <i class="fas fa-share-alt"></i>
+              </button>
+              <button class="icon-button">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="nav-bar">
+        <a href="#" class="nav-item active">
+          <i class="fas fa-home nav-icon"></i>
+          <span>素材库</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-folder nav-icon"></i>
+          <span>分类</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-cloud nav-icon"></i>
+          <span>云空间</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-user nav-icon"></i>
+          <span>我的</span>
+        </a>
+      </div>
+    </div>
+    
+    <!-- 分类页面 -->
+    <div class="screen">
+      <div class="header">
+        <div class="header-title">分类管理</div>
+        <div class="header-action">
+          <button class="icon-button">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="category-tabs">
+        <button class="category-tab active">
+          <span>自定义分类</span>
+        </button>
+        <button class="category-tab">
+          <span>智能分类</span>
+        </button>
+      </div>
+      
+      <div class="content">
+        <div class="category-list-view">
+          <!-- 常用分类 -->
+          <div class="category-section">
+            <div class="section-header">
+              <h3>常用分类</h3>
+            </div>
+            <div class="category-grid">
+              <div class="category-block">
+                <div class="category-icon">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div class="category-name">收藏夹</div>
+                <div class="category-count">128</div>
+              </div>
+              <div class="category-block">
+                <div class="category-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="category-name">最近添加</div>
+                <div class="category-count">36</div>
+              </div>
+              <div class="category-block">
+                <div class="category-icon">
+                  <i class="fas fa-download"></i>
+                </div>
+                <div class="category-name">已下载</div>
+                <div class="category-count">64</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 自定义分类 -->
+          <div class="category-section">
+            <div class="section-header">
+              <h3>我的分类</h3>
+              <button class="text-button">
+                <i class="fas fa-sort"></i>
+                <span>排序</span>
+              </button>
+            </div>
+            
+            <div class="folder-list">
+              <div class="folder-item">
+                <div class="folder-drag">
+                  <i class="fas fa-grip-vertical"></i>
+                </div>
+                <div class="folder-icon">
+                  <i class="fas fa-folder"></i>
+                </div>
+                <div class="folder-info">
+                  <div class="folder-name">产品素材</div>
+                  <div class="folder-meta">25个文件</div>
+                </div>
+                <div class="folder-actions">
+                  <button class="icon-button">
+                    <i class="fas fa-angle-right"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="folder-item">
+                <div class="folder-drag">
+                  <i class="fas fa-grip-vertical"></i>
+                </div>
+                <div class="folder-icon">
+                  <i class="fas fa-folder"></i>
+                </div>
+                <div class="folder-info">
+                  <div class="folder-name">营销素材</div>
+                  <div class="folder-meta">2个子文件夹，18个文件</div>
+                </div>
+                <div class="folder-actions">
+                  <button class="icon-button">
+                    <i class="fas fa-angle-down"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- 子文件夹 -->
+              <div class="folder-item sub-folder">
+                <div class="folder-drag">
+                  <i class="fas fa-grip-vertical"></i>
+                </div>
+                <div class="folder-icon">
+                  <i class="fas fa-folder"></i>
+                </div>
+                <div class="folder-info">
+                  <div class="folder-name">社交媒体</div>
+                  <div class="folder-meta">12个文件</div>
+                </div>
+                <div class="folder-actions">
+                  <button class="icon-button">
+                    <i class="fas fa-angle-right"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="folder-item sub-folder">
+                <div class="folder-drag">
+                  <i class="fas fa-grip-vertical"></i>
+                </div>
+                <div class="folder-icon">
+                  <i class="fas fa-folder"></i>
+                </div>
+                <div class="folder-info">
+                  <div class="folder-name">广告素材</div>
+                  <div class="folder-meta">6个文件</div>
+                </div>
+                <div class="folder-actions">
+                  <button class="icon-button">
+                    <i class="fas fa-angle-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 智能分类 -->
+          <div class="category-section">
+            <div class="section-header">
+              <h3>智能分类</h3>
+            </div>
+            <div class="smart-folder-list">
+              <div class="smart-folder">
+                <div class="smart-folder-icon">
+                  <i class="fas fa-calendar"></i>
+                </div>
+                <div class="smart-folder-info">
+                  <div class="smart-folder-name">本月添加</div>
+                  <div class="smart-folder-rule">自动收集最近30天添加的文件</div>
+                </div>
+                <div class="switch">
+                  <input type="checkbox" id="switch1" checked>
+                  <label for="switch1"></label>
+                </div>
+              </div>
+              
+              <div class="smart-folder">
+                <div class="smart-folder-icon">
+                  <i class="fas fa-tags"></i>
+                </div>
+                <div class="smart-folder-info">
+                  <div class="smart-folder-name">设计资源</div>
+                  <div class="smart-folder-rule">包含标签：UI、图标、模板</div>
+                </div>
+                <div class="switch">
+                  <input type="checkbox" id="switch2" checked>
+                  <label for="switch2"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <a href="#" class="nav-item">
+          <i class="fas fa-home nav-icon"></i>
+          <span>素材库</span>
+        </a>
+        <a href="#" class="nav-item active">
+          <i class="fas fa-folder nav-icon"></i>
+          <span>分类</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-cloud nav-icon"></i>
+          <span>云空间</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-user nav-icon"></i>
+          <span>我的</span>
+        </a>
+      </div>
+    </div>
+    
+    <!-- 云空间页面 -->
+    <div class="screen">
+      <div class="header">
+        <div class="header-title">云空间</div>
+        <div class="header-action">
+          <button class="icon-button">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="content">
+        <!-- 存储概览 -->
+        <div class="storage-overview">
+          <div class="storage-card">
+            <div class="storage-info">
+              <div class="storage-title">存储空间</div>
+              <div class="storage-used">已用 24.5GB / 100GB</div>
+            </div>
+            <div class="storage-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 24.5%"></div>
+              </div>
+              <div class="storage-types">
+                <div class="storage-type">
+                  <div class="type-color" style="background: #FF6B6B"></div>
+                  <div class="type-name">图片</div>
+                  <div class="type-size">12.8GB</div>
+                </div>
+                <div class="storage-type">
+                  <div class="type-color" style="background: #4ECDC4"></div>
+                  <div class="type-name">视频</div>
+                  <div class="type-size">8.2GB</div>
+                </div>
+                <div class="storage-type">
+                  <div class="type-color" style="background: #45B7D1"></div>
+                  <div class="type-name">音频</div>
+                  <div class="type-size">2.5GB</div>
+                </div>
+                <div class="storage-type">
+                  <div class="type-color" style="background: #96CEB4"></div>
+                  <div class="type-name">其他</div>
+                  <div class="type-size">1GB</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 同步状态 -->
+        <div class="sync-status">
+          <div class="section-header">
+            <h3>同步状态</h3>
+            <button class="text-button">
+              <i class="fas fa-sync"></i>
+              <span>立即同步</span>
+            </button>
+          </div>
+          
+          <div class="sync-card">
+            <div class="sync-info">
+              <i class="fas fa-check-circle"></i>
+              <div class="sync-text">
+                <div class="sync-title">已完成同步</div>
+                <div class="sync-time">最后同步时间：2024-03-18 15:30</div>
+              </div>
+            </div>
+            <div class="sync-stats">
+              <div class="sync-stat">
+                <div class="stat-value">128</div>
+                <div class="stat-label">已同步文件</div>
+              </div>
+              <div class="sync-stat">
+                <div class="stat-value">12</div>
+                <div class="stat-label">等待同步</div>
+              </div>
+              <div class="sync-stat">
+                <div class="stat-value">5</div>
+                <div class="stat-label">同步失败</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 存储优化 -->
+        <div class="storage-optimization">
+          <div class="section-header">
+            <h3>存储优化</h3>
+          </div>
+          
+          <div class="optimization-list">
+            <div class="optimization-item">
+              <div class="optimization-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="optimization-info">
+                <div class="optimization-title">
+                  <span>发现重复文件</span>
+                  <span class="badge">12个文件</span>
+                </div>
+                <div class="optimization-desc">可释放 1.2GB 存储空间</div>
+              </div>
+              <button class="button-outline">
+                查看详情
+              </button>
+            </div>
+            
+            <div class="optimization-item">
+              <div class="optimization-icon info">
+                <i class="fas fa-file-archive"></i>
+              </div>
+              <div class="optimization-info">
+                <div class="optimization-title">
+                  <span>大文件管理</span>
+                  <span class="badge">8个文件</span>
+                </div>
+                <div class="optimization-desc">超过500MB的文件</div>
+              </div>
+              <button class="button-outline">
+                查看详情
+              </button>
+            </div>
+            
+            <div class="optimization-item">
+              <div class="optimization-icon success">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="optimization-info">
+                <div class="optimization-title">
+                  <span>历史版本</span>
+                  <span class="badge">24个文件</span>
+                </div>
+                <div class="optimization-desc">可释放 800MB 存储空间</div>
+              </div>
+              <button class="button-outline">
+                查看详情
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <a href="#" class="nav-item">
+          <i class="fas fa-home nav-icon"></i>
+          <span>素材库</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-folder nav-icon"></i>
+          <span>分类</span>
+        </a>
+        <a href="#" class="nav-item active">
+          <i class="fas fa-cloud nav-icon"></i>
+          <span>云空间</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-user nav-icon"></i>
+          <span>我的</span>
+        </a>
+      </div>
+    </div>
+    
+    <!-- 个人中心页面 -->
+    <div class="screen">
+      <div class="header">
+        <div class="header-title">个人中心</div>
+        <div class="header-action">
+          <button class="icon-button">
+            <i class="fas fa-qrcode"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="content">
+        <!-- 用户信息 -->
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <img src="https://i.pravatar.cc/100" alt="用户头像">
+            <div class="profile-badge">
+              <i class="fas fa-crown"></i>
+            </div>
+          </div>
+          <div class="profile-info">
+            <div class="profile-name">张小明</div>
+            <div class="profile-title">高级会员</div>
+          </div>
+          <button class="button-outline">
+            编辑资料
+          </button>
+        </div>
+        
+        <!-- 数据概览 -->
+        <div class="profile-stats">
+          <div class="stat-card">
+            <div class="stat-value">1,234</div>
+            <div class="stat-label">素材总数</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">24.5GB</div>
+            <div class="stat-label">已用空间</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">28</div>
+            <div class="stat-label">收藏夹</div>
+          </div>
+        </div>
+        
+        <!-- 功能列表 -->
+        <div class="menu-group">
+          <div class="menu-title">账号设置</div>
+          <div class="menu-list">
+            <a href="#" class="menu-item">
+              <div class="menu-icon blue">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">账号安全</div>
+                <div class="menu-desc">密码修改、手机绑定</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+            
+            <a href="#" class="menu-item">
+              <div class="menu-icon purple">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">通知设置</div>
+                <div class="menu-desc">消息提醒、推送设置</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+            
+            <a href="#" class="menu-item">
+              <div class="menu-icon green">
+                <i class="fas fa-sync"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">同步设置</div>
+                <div class="menu-desc">自动同步、流量控制</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="menu-group">
+          <div class="menu-title">使用统计</div>
+          <div class="menu-list">
+            <a href="#" class="menu-item">
+              <div class="menu-icon orange">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">使用报告</div>
+                <div class="menu-desc">查看详细使用统计</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+            
+            <a href="#" class="menu-item">
+              <div class="menu-icon red">
+                <i class="fas fa-history"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">操作历史</div>
+                <div class="menu-desc">浏览记录、操作记录</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="menu-group">
+          <div class="menu-title">其他</div>
+          <div class="menu-list">
+            <a href="#" class="menu-item">
+              <div class="menu-icon gray">
+                <i class="fas fa-question-circle"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">帮助中心</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+            
+            <a href="#" class="menu-item">
+              <div class="menu-icon gray">
+                <i class="fas fa-comment-alt"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">意见反馈</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+            
+            <a href="#" class="menu-item">
+              <div class="menu-icon gray">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <div class="menu-content">
+                <div class="menu-label">关于我们</div>
+                <div class="menu-version">当前版本 1.0.0</div>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <button class="button-danger">
+          退出登录
+        </button>
+      </div>
+
+      <div class="nav-bar">
+        <a href="#" class="nav-item">
+          <i class="fas fa-home nav-icon"></i>
+          <span>素材库</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-folder nav-icon"></i>
+          <span>分类</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-cloud nav-icon"></i>
+          <span>云空间</span>
+        </a>
+        <a href="#" class="nav-item active">
+          <i class="fas fa-user nav-icon"></i>
+          <span>我的</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Font Awesome 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html>
