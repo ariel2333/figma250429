@@ -221,24 +221,52 @@
     }
     
     /* 分类标签样式 */
+    .category-list {
+      display: flex;
+      gap: var(--space-xs);
+      padding: var(--space-md);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .category-list::-webkit-scrollbar {
+      display: none;
+    }
+    
     .category-item {
-      background: rgba(142, 142, 147, 0.12);
-      color: var(--text-secondary);
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-xs) var(--space-md);
+      background: var(--bg-gray);
       border-radius: var(--radius-full);
-      padding: var(--space-sm) var(--space-lg);
       font-size: 14px;
-      font-weight: 500;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+    }
+    
+    .category-item i {
+      font-size: 14px;
     }
     
     .category-item:hover {
-      background: rgba(142, 142, 147, 0.18);
+      background: var(--bg-card);
       color: var(--text-primary);
+      border-color: var(--border-light);
     }
     
     .category-item.active {
       background: var(--primary);
       color: var(--text-white);
+      border-color: var(--primary);
+    }
+    
+    .category-item.active:hover {
+      background: var(--primary-light);
     }
     
     /* 图标按钮样式 */
@@ -556,16 +584,6 @@
       justify-content: flex-end;
       gap: var(--space-xs);
       padding: var(--space-xs);
-    }
-    
-    .category-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-xs);
-    }
-    
-    .category-item i {
-      font-size: 16px;
     }
     
     .category-tabs {
@@ -1224,7 +1242,10 @@
       </div>
       
       <div class="category-list">
-        <div class="category-item active">全部</div>
+        <div class="category-item active">
+          <i class="fas fa-layer-group"></i>
+          <span>全部</span>
+        </div>
         <div class="category-item">
           <i class="fas fa-image"></i>
           <span>图片</span>
